@@ -1,9 +1,43 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import GifGridItem from './GifGridItem';
 
 const GifGrid = ({category}) => {
+
+    const [images, setImages] = useState([]);
+
+    useEffect (()=>{
+        getGif();
+    }, [])
+
+    const getGif = async() =>{
+        const url = 'https://api.giphy.com/v1/gifs/search?q=Rick+and+Morty&limit=10&api_key=0GKw9Gdyo1TGaZ4ptDMNo6n7dnaBzHYT';
+        const resp = await fetch( url );
+        const {data} = await resp.json();
+
+        const gifs = data.map( img => {
+            return {
+                id: img.id,
+                title: img.title,
+                url: img.images?.downsized_medium.url //El signo de interrogacion lo que hace es una condicion donde pregunta si existe ese elemento lo agregue y si no, no hace nada
+            }
+        })
+        console.log(gifs);
+        setImages( gifs );
+    }
+
     return (
         <div>
             <h3>{category}</h3>
+        
+                {
+                  images.map( img => (
+                    <GifGridItem
+                        key={img.id}
+                        {...img}
+                    />
+                  ))
+                }
+            
         </div>
     )
 }

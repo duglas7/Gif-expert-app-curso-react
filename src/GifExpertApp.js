@@ -6,7 +6,6 @@ const GifExpertApp = () => {
 
     const [categories, setCategories] = useState(['Dragon Ball']);
    
-
     return (
         <>
         <h2>GifExpertApp</h2>
