@@ -1,24 +1,28 @@
-import React, {useState} from 'react'
-import AddCategory from './components/AddCategory';
-import GifGrid from './components/GifGrid';
+import React, { useState } from 'react'
+import AddCategory from './components/AddCategory'
+import GifGrid from './components/GifGrid'
 
 const GifExpertApp = () => {
 
-    const [categories, setCategories] = useState(['Dragon Ball']);
-   
+    const [categories, setCategories] = useState(['Dragon Ball'])
+
     return (
         <>
         <h2>GifExpertApp</h2>
-        <AddCategory setCategories={setCategories}/>
-        <hr />
+        <AddCategory
+            setCategories={ setCategories } // Esto es para comunicar el estado de este componente con el otro componente llamado en este mismo
+         />
 
+        <hr/>
+        
         <ol>
             {
-                categories.map( category => 
+                categories.map( category =>(
                     <GifGrid 
-                        key={category}
-                        category = {category} />
-                )
+                        category = { category }
+                        key = { category } 
+                    />
+                    ))
             }
         </ol>
 
